@@ -1,0 +1,24 @@
+<h1>Dev Search</h1>
+
+<form method="get">
+  <input type="text" name="query" value="<%= @query %>" placeholder="">
+</form>
+<% if @query.present? %>
+  <hr />
+
+  <ul>
+    <% @results.each do |result| %>
+      <li>
+        <img src="<%= result.icon %>" title="<%= result.author %>" width='40' height='40'/>
+        <%= result.author %>
+        <h3><%= link_to result.title, result.url %></h3>
+        <p><%= truncate result.description, :length => 250 %></p>
+        <% if result.language.present? %>
+          <p style='color:<%=  Linguist::Language[result.language].color %>;'>
+            <%= result.language %>
+          </p>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
